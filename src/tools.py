@@ -42,7 +42,49 @@ def read_file(name: str) -> str:
         return f"Error reading file {name}: {e}"
 
 
-tools = [list_files, read_file]
+def rename_file(name: str, new_name: str) -> str:
+    """
+    Rename a file.
+
+    Args:
+        name (str): The name of the file to rename.
+        new_name (str): The new name for the file.
+    Returns:
+        str: Success or error message.
+    """
+    print(f"(rename_file) name: {name}, new_name: {new_name}")
+
+    file_path = BASE_DIR / name
+    new_file_path = BASE_DIR / new_name
+
+    try:
+        file_path.rename(new_file_path)
+        return f"File renamed from {name} to {new_name}"
+    except Exception as e:
+        return f"Error renaming file {name}: {e}"
+
+
+def delete_file(name: str) -> str:
+    """
+    Delete a file.
+
+    Args:
+        name (str): The name of the file to delete.
+    Returns:
+        str: Success or error message.
+    """
+    print(f"(delete_file) name: {name}")
+
+    file_path = BASE_DIR / name
+
+    try:
+        file_path.unlink()
+        return f"File {name} deleted successfully"
+    except Exception as e:
+        return f"Error deleting file {name}: {e}"
+
+
+tools = [list_files, read_file, rename_file, delete_file]
 
 
 __all__ = ["tools"]
