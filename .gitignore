@@ -61,3 +61,6 @@ celerybeat-schedule
 
 # VS Code
 .vscode/
+
+# put files here for the agent to play with
+demo

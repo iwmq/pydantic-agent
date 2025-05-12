@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-BASE_DIR = Path('.')
+BASE_DIR = Path(__file__).parent.parent / "demo"
 
 
 def list_files() -> list[str]:
