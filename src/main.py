@@ -17,12 +17,17 @@ agent = Agent(
 
 
 def main():
+    history: list[str] = []
     while True:
         user_input = input("You: ")
         if user_input.lower() in ["exit", "quit"]:
             break
-        response: AgentRunResult[str] = agent.run_sync(user_prompt=user_input)
+        response: AgentRunResult[str] = agent.run_sync(
+            user_prompt=user_input,
+            message_history=history
+        )
         print(f"Agent: {response.output}")
+        history = list(response.all_messages())
 
 
 if __name__ == "__main__":
