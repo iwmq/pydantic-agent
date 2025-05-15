@@ -104,7 +104,41 @@ def create_file(name: str, content: str) -> str:
     except Exception as e:
         return f"Error creating file {name}: {e}"
 
-tools = [list_files, read_file, rename_file, delete_file, create_file]
+
+def replace_in_file(name: str, start: int, end: int, content: str) -> str:
+    """
+    Replace a range of lines in a file with new content.
+
+    Args:
+        name (str): The name of the file to modify.
+        start (int): The starting line number (1-indexed).
+        end (int): The ending line number (1-indexed).
+        content (str): The new content to insert.
+    Returns:
+        str: Success or error message.
+    """
+    print(f"(replace_in_file) name: {name}, start: {start}, end: {end}, content: {content}")
+
+    file_path = BASE_DIR / name
+
+    try:
+        lines = file_path.read_text().splitlines()
+        new_lines = content.splitlines()
+        lines[start - 1:end] = new_lines
+        file_path.write_text("\n".join(lines))
+        return f"Lines {start} to {end} in {name} replaced successfully"
+    except Exception as e:
+        return f"Error replacing lines in file {name}: {e}"
+
+
+tools = [
+    list_files,
+    read_file,
+    rename_file,
+    delete_file,
+    create_file,
+    replace_in_file
+]
 
 
 __all__ = ["tools"]
