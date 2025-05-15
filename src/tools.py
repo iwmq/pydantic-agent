@@ -84,7 +84,27 @@ def delete_file(name: str) -> str:
         return f"Error deleting file {name}: {e}"
 
 
-tools = [list_files, read_file, rename_file, delete_file]
+def create_file(name: str, content: str) -> str:
+    """
+    Create a new file with the given name and content.
+
+    Args:
+        name (str): The name of the file to create.
+        content (str): The content to write to the file.
+    Returns:
+        str: Success or error message.
+    """
+    print(f"(create_file) name: {name}, content: {content}")
+
+    file_path = BASE_DIR / name
+
+    try:
+        file_path.write_text(content)
+        return f"File {name} created successfully"
+    except Exception as e:
+        return f"Error creating file {name}: {e}"
+
+tools = [list_files, read_file, rename_file, delete_file, create_file]
 
 
 __all__ = ["tools"]
