@@ -27,6 +27,7 @@ def main():
             message_history=history
         )
         print(f"Agent: {response.output}")
+        print(f"Usage: {response.usage()}")
         history = list(response.all_messages())
 
 
