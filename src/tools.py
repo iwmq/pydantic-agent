@@ -1,4 +1,5 @@
 from pathlib import Path
+import subprocess
 
 
 BASE_DIR = Path(__file__).parent.parent / "demo"
@@ -131,13 +132,37 @@ def replace_in_file(name: str, start: int, end: int, content: str) -> str:
         return f"Error replacing lines in file {name}: {e}"
 
 
+def run_python(script_path: str) -> str:
+    """
+    Run a Python script.
+
+    Args:
+        script_path (str): The path to the Python script to run.
+    Returns:
+        str: The output of the script.
+    """
+    print(f"(run_python) script_path: {script_path}")
+
+    try:
+        result = subprocess.run(
+            ["python", script_path],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        return f"Error running script {script_path}: {e.stderr}"
+
+
 tools = [
     list_files,
     read_file,
     rename_file,
     delete_file,
     create_file,
-    replace_in_file
+    replace_in_file,
+    run_python
 ]
 
 
